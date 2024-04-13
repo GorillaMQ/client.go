@@ -1,8 +1,8 @@
 package go_sdk
 
 import (
+	"crypto/tls"
 	"fmt"
-	"net"
 
 	"github.com/gorillamq/go-sdk/internal"
 	"github.com/gorillamq/go-sdk/pkg"
@@ -28,7 +28,8 @@ func NewClient(uri string) (Client, error) {
 		return nil, fmt.Errorf("invalid uri: %w", err)
 	}
 
-	conn, err := net.Dial("tcp", url.Address)
+	tlsConfig := &tls.Config{InsecureSkipVerify: true}
+	conn, err := tls.Dial("tcp", url.Address, tlsConfig)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to server: %w", err)
 	}
