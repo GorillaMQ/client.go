@@ -22,8 +22,8 @@ func UnpackURL(inputURL string) (*url, error) {
 		return nil, fmt.Errorf("invalid uri")
 	}
 
-	// protocol must be 'st'
-	if protocolSplit[0] != "gorillamq" {
+	// protocol must be 'gorillamq' or 'gorillamqs'
+	if protocolSplit[0] != "gorillamq" && protocolSplit[0] != "gorillamqs" {
 		return nil, fmt.Errorf("not using gorillamq protocol (gorillamq://...)")
 	}
 
